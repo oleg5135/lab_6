@@ -1,26 +1,36 @@
 import math
 
-# Введення початкових даних
-xp = float(input("Введіть X_поч (початкове значення x): "))
-xk = float(input("Введіть X_кін (кінцеве значення x): "))
-dx = float(input("Введіть dX (крок): "))
+# Введення значень
+N = int(input("Введіть значення N: "))
 
-# Виведення заголовка таблиці
-print("x\t\t\t\t\t y")
-print("-" * 30)
+# Обчислення виразу за допомогою різних циклів
 
-# Цикл для обчислення значень y на заданому інтервалі
-x = xp
-while x <= xk:
-    if x <= -1:
-        y = x + math.log10(abs(math.cos(5 * x))) + math.exp(-1 / x)
-    elif -1 < x < 0.4:
-        y = x + math.sqrt((2 - x)**3) - math.tan(x)
-    else:  # x >= 0.4
-        y = x + math.sin(5 * x) - math.sqrt(abs(1 - x))
-    
-    # Виведення результатів з табуляцією
-    print(f"{x:.4f}\t\t\t {y:.4f}")
-    x += dx
+# 1. Цикл while
+S_while = 0
+i = 1
+while i <= N:
+    S_while += math.sqrt(1 + (math.cos(i)**2) * math.sin(i)) / (1 + (math.sin(i)**2) * math.cos(i))
+    i += 1
+print("Результат (while):", S_while)
 
-print("-" * 30)
+# 2. Цикл do-while (емуляція)
+S_dowhile = 0
+i = 1
+while True:
+    S_dowhile += math.sqrt(1 + (math.cos(i)**2) * math.sin(i)) / (1 + (math.sin(i)**2) * math.cos(i))
+    i += 1
+    if i > N:
+        break
+print("Результат (do-while):", S_dowhile)
+
+# 3. Цикл for (інкремент)
+S_for_inc = 0
+for i in range(1, N + 1):
+    S_for_inc += math.sqrt(1 + (math.cos(i)**2) * math.sin(i)) / (1 + (math.sin(i)**2) * math.cos(i))
+print("Результат (for, інкремент):", S_for_inc)
+
+# 4. Цикл for (декремент)
+S_for_dec = 0
+for i in range(N, 0, -1):
+    S_for_dec += math.sqrt(1 + (math.cos(i)**2) * math.sin(i)) / (1 + (math.sin(i)**2) * math.cos(i))
+print("Результат (for, декремент):", S_for_dec)
