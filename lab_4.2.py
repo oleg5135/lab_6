@@ -1,27 +1,28 @@
-import math
-
-# Введення значень xp, xk, dx
+# Введення значень
 xp = float(input("xp = "))
 xk = float(input("xk = "))
 dx = float(input("dx = "))
+a = float(input("a = "))
+b = float(input("b = "))
+c = float(input("c = "))
 
-# Виведення заголовку таблиці
-print(f"{'-' * 25}")
-print(f"| {'x':^7} | {'y':^10} |")
-print(f"{'-' * 25}")
+# Виведення заголовка таблиці
+print("--------------------------------")
+print("|{:>5} |{:>7} |".format("x", "F"))
+print("--------------------------------")
 
 x = xp
 while x <= xk:
-    A = abs(4 * x - 1)
-    if x < 0:
-        B = math.pow(x, 7) - 2 * x
-    elif x >= 3:
-        B = math.pow(x, 4) + math.exp(math.pow(x, 2) + 3)
+    if x + c < 0 and a != 0:
+        F = -a * (x ** 2) - b
+    elif x + c > 0 and a == 0:
+        F = (x - a) / (x - c)
     else:
-        B = math.atan((math.exp(x) + 1) / 8)
-    
-    y = A + B
-    print(f"| {x:7.2f} | {y:10.3f} |")
+        F = x / c + c / x
+
+    # Виведення значень у таблицю
+    print("|{:>5.2f} |{:>7.3f} |".format(x, F))
+
     x += dx
 
-print(f"{'-' * 25}")
+print("--------------------------------")
